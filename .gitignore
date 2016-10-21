@@ -1,0 +1,12 @@
+*.gem
+Gemfile.lock
+.bundle
+**/*/vendor/bundle
+sunspot_rails/spec/rails2/vendor
+sunspot_rails/spec/rails3/vendor
+sunspot-solr.pid
+sunspot_solr/solr/solr-webapp
+.yardoc
+docs
+*.swp
+.idea

@@ -1,0 +1,42 @@
+language: ruby
+cache: bundler
+sudo: false
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+  # - rbx-2.0
+  # - jruby
+
+env:
+  - GEM=sunspot
+  - GEM=sunspot_rails RAILS=3.0.0
+  - GEM=sunspot_rails RAILS=3.1.0
+  - GEM=sunspot_rails RAILS=3.2.0
+  - GEM=sunspot_rails RAILS=4.0.0
+  - GEM=sunspot_rails RAILS=4.1.0
+  - GEM=sunspot_rails RAILS=4.2.0
+  - GEM=sunspot_solr
+
+# Limit the size of the matrix by only performing the most common builds
+matrix:
+  exclude:
+    # Not supporting Ruby 2.0 and Rails < 3
+    - rvm: 2.0.0
+      env: GEM=sunspot_rails RAILS=3.0.0
+    - rvm: 2.0.0
+      env: GEM=sunspot_rails RAILS=3.1.0
+  allow_failures:
+    # SQLITE fails to load correctly on Travis in Ruby 2.0
+    - rvm: 2.0.0
+      env: GEM=sunspot_rails RAILS=3.2.0
+    - rvm: 2.0.0
+      env: GEM=sunspot_rails RAILS=4.0.0
+    - rvm: 2.0.0
+      env: GEM=sunspot_rails RAILS=4.1.0
+    - rvm: 2.0.0
+      env: GEM=sunspot_rails RAILS=4.2.0
+
+script:
+  - ci/travis.sh
